@@ -47,7 +47,7 @@ Then, run `sudo shutdown -r now` to update new configuration.
 
   - You will see the the picture like below ( If you see Overwrite just press y - this means you have already generated the keygen before and now new key will overwrite the old ones):
 
-    ![Picture 1](D:\Picture\5.png)
+    ![Picture 1]((https://github.com/TranAnh-Tuan/Kubespray-Installation-tutorial/blob/main/images/5.png)
   
 ### On the server (where you ssh TO)
 - Edit the file in `/etc/ssh/ssh_config` to add the following line:
@@ -144,7 +144,7 @@ If you plan to change the CNI plugin from the default(calico) to something else 
 **kube_network_plugin: weave** 
    
 - **Warning** : You may see this error:
-    ![](D:\Picture\4.png)
+    ![](https://github.com/TranAnh-Tuan/Kubespray-Installation-tutorial/blob/main/images/4.png)
         
     - Allow prerelease `gevent` versions via:
 
@@ -164,26 +164,26 @@ If you plan to change the CNI plugin from the default(calico) to something else 
 
    - You may see this error:
         
-        ![](D:\Picture\6.png)
+        ![](https://github.com/TranAnh-Tuan/Kubespray-Installation-tutorial/blob/main/images/6.png)
     
     -  This error can be fixed by applying the below command:
      > ` # pip3 install ruamel.yaml `
 
 - After finish updating Ansible inventory, you should see result like this ( my cluster has one worker node and one master node)):
     
-    ![](D:\Picture\7.png)
+    ![](https://github.com/TranAnh-Tuan/Kubespray-Installation-tutorial/blob/main/images/7.png)
 
 - Check file host.yaml
     > ` vim inventory/mycluster/hosts.yaml `
     
     -You can see the result something like this:
     
-    ![](D:\Picture\8.png)
+    ![](https://github.com/TranAnh-Tuan/Kubespray-Installation-tutorial/blob/main/images/.png)
     
         - However, I intend to use node 1 as control plane aka master node and node 2 as worker node. Therefore, I will delete node 2 in kube_control_plane:
 
 
-    ![](D:\Picture\9.png)
+    ![](https://github.com/TranAnh-Tuan/Kubespray-Installation-tutorial/blob/main/images/9.png)
 
 
 - Review and change parameters under ``inventory/mycluster/group_vars``
@@ -201,7 +201,7 @@ Without `--become` the playbook will fail to run!
 - Try the below command:
     > ` $ kubectl get nodes `
     - You may see this error:
-        ![](D:\Picture\10.png)
+        ![](https://github.com/TranAnh-Tuan/Kubespray-Installation-tutorial/blob/main/images/10.png)
 
 - Fix this error by following the below command:
 
@@ -214,21 +214,21 @@ Without `--become` the playbook will fail to run!
     > ` $ kubectl get nodes `
 
     - It should look like this:
-        ![](D:\Picture\11.png)
+        ![](https://github.com/TranAnh-Tuan/Kubespray-Installation-tutorial/blob/main/images/11.png)
     
     > ` $ kubectl get pods -A`
 
     - It should look like this:
-        ![](D:\Picture\12.png)
+        ![](https://github.com/TranAnh-Tuan/Kubespray-Installation-tutorial/blob/main/images/12.png)
 
 - Look carefully in the red box you can see that the `core-dns-5f44f89dcc-plrft` falls to **Pending State** looping forever.
-    ![](D:\Picture\13.png)
+    ![](https://github.com/TranAnh-Tuan/Kubespray-Installation-tutorial/blob/main/images/13.png)
     - To fix this problem, run those commands:
         > ` $ kubectl describe pods core-dns-5f44f89dcc-plrft -n kube-system `
     
     - The picture below describes the problem:
 
-    ![](D:\Picture\14.png)
+    ![](https://github.com/TranAnh-Tuan/Kubespray-Installation-tutorial/blob/main/images/14.png)
 
     - The problem is that the pod is trying to deploy into the master node which has tainted mark ( the mark from the developer tainted it so that no pods can be deployed by **Scheduler** into it)
 
@@ -236,20 +236,20 @@ Without `--become` the playbook will fail to run!
         > ` $ kubectl get nodes `
         > ` $ kubectl taint nodes --all node-role.kubernetes.io/master- `
 
-        ![](D:\Picture\11.png)
-        ![](D:\Picture\16.png)
-        ![](D:\Picture\15.png)
+        ![](https://github.com/TranAnh-Tuan/Kubespray-Installation-tutorial/blob/main/images/11.png)
+        ![](https://github.com/TranAnh-Tuan/Kubespray-Installation-tutorial/blob/main/images/16.png)
+        ![](https://github.com/TranAnh-Tuan/Kubespray-Installation-tutorial/blob/main/images/15.png)
     
     - And there you go, the pod is now able to deploy into the master node.
-        ![](D:\Picture\17.png)
+        ![](https://github.com/TranAnh-Tuan/Kubespray-Installation-tutorial/blob/main/images/17.png)
 
     **Warning** : Remmember to taint the master node immediatly after you have finished the deployment.
     - > ` $ kubectl taint nodes kube-master1 node.kubernetes.io/kube-master1:NoSchedule `
 
-    ## Author
+    ### Author
     ---
-    #### Name: Ngọc Ánh Phạm
-    #### Email: phamngocanh2711@gmail.com
+    ##### Name: Ngọc Ánh Phạm
+    ##### Email: phamngocanh2711@gmail.com
     ---
-    #### Name: Trần Anh Tuấn
-    #### Email: tuan-hs11115@ngoisao.edu.vn
+    ##### Name: Trần Anh Tuấn
+    ##### Email: tuan-hs11115@ngoisao.edu.vn
