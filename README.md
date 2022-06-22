@@ -13,7 +13,7 @@ In case your server has sufficient RAM memory or does not require the use of swa
 - After that, open vim **/etc/fstab** (put # in line /swap.img)
   > ` $ sudo vim /etc/fstab `
 
-  ![]([D:\Picture\](https://github.com/TranAnh-Tuan/Kubespray-Installation-tutorial/blob/main/images/3.png)
+  ![](https://github.com/TranAnh-Tuan/Kubespray-Installation-tutorial/blob/main/images/3.png)
 
 ## Initial setup
 
