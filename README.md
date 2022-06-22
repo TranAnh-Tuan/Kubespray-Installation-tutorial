@@ -47,7 +47,7 @@ Then, run `sudo shutdown -r now` to update new configuration.
 
   - You will see the the picture like below ( If you see Overwrite just press y - this means you have already generated the keygen before and now new key will overwrite the old ones):
 
-    ![]((https://github.com/TranAnh-Tuan/Kubespray-Installation-tutorial/blob/main/images/5.png)
+    ![](https://github.com/TranAnh-Tuan/Kubespray-Installation-tutorial/blob/main/images/5.png)
   
 ### On the server (where you ssh TO)
 - Edit the file in `/etc/ssh/ssh_config` to add the following line:
